@@ -2,17 +2,25 @@
  * @Author: Ivan Chichvarin ichichvarin@humanplus.ru
  * @Date: 2024-06-08 14:39:36
  * @LastEditors: Ivan Chichvarin ichichvarin@humanplus.ru
- * @LastEditTime: 2024-06-08 14:43:36
+ * @LastEditTime: 2024-06-09 01:11:00
  * @FilePath: /BiMap/bimap.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 #pragma once
 
+#include <memory>
 #include <optional>
 #include <string_view>
 
+
 class BiMap {
 public:
+    BiMap();
+    BiMap(const BiMap& other);
+    BiMap(BiMap&& other) noexcept;
+    BiMap& operator=(const BiMap& other);
+    BiMap& operator=(BiMap&& other) noexcept;
+    ~BiMap();
     /**
      * Добавляет в словарь пару "ключ-значение".
      * В случае успеха возвращает true.
@@ -33,7 +41,6 @@ public:
     std::optional<std::string_view> FindKey(std::string_view value) const noexcept;
 
 private:
-    struct Impl;
-    
+    struct Impl; 
     std::unique_ptr<Impl> impl_;
 };
